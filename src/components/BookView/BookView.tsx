@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { Paper, Typography, Grid, Chip, Divider, TextField, Button } from '@material-ui/core';
-import { PersonOutline as PersonIcon } from '@material-ui/icons';
+import { PersonOutline as PersonIcon, ArrowBackIos as ArrowBackIcon } from '@material-ui/icons';
 
 import { BooksApi, BookReviewsApi } from 'api';
 import { BookDto } from 'api/types/books/books';
@@ -15,6 +15,7 @@ import dateFormatter from 'utils/dateFormatter';
 const BookView: FC = () => {
   const styles = useStyles();
 
+  const history = useHistory();
   const { bookId } = useParams<{ bookId: string }>();
 
   const [book, setBook] = useState<BookDto | null>(null);
@@ -80,6 +81,12 @@ const BookView: FC = () => {
 
   return (
     <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <Button onClick={() => history.push('/')}>
+          <ArrowBackIcon fontSize="small" className={styles.arrowBackIcon} /> В список
+        </Button>
+      </Grid>
+
       <Grid item xs={6}>
         <Paper className={styles.paper}>
           <Grid container spacing={3}>
