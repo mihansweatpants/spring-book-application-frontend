@@ -5,8 +5,12 @@ import { AuthorDto } from './types/books/authors';
 
 class AuthorsApi extends HttpApi {
 
-  getAll = (params?: PaginationRequestParams) => {
+  getList = (params?: PaginationRequestParams) => {
     return this.get<PaginationResponse<AuthorDto>>('/', { params })
+  }
+
+  getFullList = () => {
+    return this.getAll<AuthorDto>('/')
   }
 
 }

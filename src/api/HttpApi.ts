@@ -40,6 +40,29 @@ export default abstract class HttpApi {
     return this.response<T>(this.http.delete(url, config));
   }
 
+  protected async getAll<T = any>(url: string, config?: AxiosRequestConfig): Promise<T[]> {
+    const DEFAULT_LIMIT = 100;
+    let page = 0;
+
+    const { items, totalItems } = await this.get(url, {
+      ...config,
+      params: { page, limit: DEFAULT_LIMIT },
+    });
+
+    const allItems: T[] = items as T[];
+
+    while (allItems.length !== totalItems) {
+      page++;
+      const { items } = await this.get(url, {
+        ...config,
+        params: { page, limit: DEFAULT_LIMIT },
+      });
+      allItems.push(...items as T[]);
+    }
+
+    return allItems;
+  }
+
   private async response<T>(request: AxiosPromise<BasepApiResponse<T>>): Promise<T> {
     const response: AxiosResponse<BasepApiResponse<T>> = await request;
     const { data: responseData } = response;

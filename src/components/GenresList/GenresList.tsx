@@ -21,7 +21,7 @@ const GenresList: FC = () => {
 
   useEffect(
     () => {
-      GenresApi.getAll({ limit, page }).then(({ items, totalItems }) => {
+      GenresApi.getList({ limit, page }).then(({ items, totalItems }) => {
         setGenres(items);
         setTotalItems(totalItems);
       });

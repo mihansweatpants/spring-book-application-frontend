@@ -7,3 +7,4 @@ export { default as Router } from './Router';
 export { default as NotFound } from './NotFound';
 export { default as BookView } from './BookView';
 export { default as Layout } from './Layout';
+export { default as CreateBookView } from './CreateBookView';

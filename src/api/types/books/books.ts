@@ -7,3 +7,9 @@ export interface BookDto {
   author: AuthorDto;
   genres: GenreDto[];
 }
+
+export interface CreateBookDto {
+  title: string;
+  genreIds: number[];
+  authorId: number;
+}

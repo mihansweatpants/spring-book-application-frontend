@@ -21,7 +21,7 @@ const AuthorsList: FC = () => {
 
   useEffect(
     () => {
-      AuthorsApi.getAll({ limit, page }).then(({ items, totalItems }) => {
+      AuthorsApi.getList({ limit, page }).then(({ items, totalItems }) => {
         setAuthors(items);
         setTotalItems(totalItems);
       });

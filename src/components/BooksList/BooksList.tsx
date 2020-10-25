@@ -21,7 +21,7 @@ const BooksList: FC = () => {
 
   useEffect(
     () => {
-      BooksApi.getAll({ limit, page }).then(({ items, totalItems }) => {
+      BooksApi.getList({ limit, page }).then(({ items, totalItems }) => {
         setBooks(items);
         setTotalItems(totalItems);
       });

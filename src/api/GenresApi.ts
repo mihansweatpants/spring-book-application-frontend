@@ -5,8 +5,12 @@ import { GenreDto } from './types/books/genres';
 
 class GenresApi extends HttpApi {
 
-  getAll = (params?: PaginationRequestParams) => {
+  getList = (params?: PaginationRequestParams) => {
     return this.get<PaginationResponse<GenreDto>>('/', { params })
+  }
+
+  getFullList = () => {
+    return this.getAll<GenreDto>('/');
   }
 
 }
