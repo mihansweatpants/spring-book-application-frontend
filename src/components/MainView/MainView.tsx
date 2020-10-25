@@ -13,7 +13,7 @@ const MainView: FC = () => {
   const [activeTab, setActiveTab] = useState(MainViewTab.Books);
 
   return (
-    <div className={styles.root}>
+    <>
       <Paper className={styles.paper}>
         <MainViewTabs
           activeTab={activeTab}
@@ -26,7 +26,7 @@ const MainView: FC = () => {
         {activeTab === MainViewTab.Authors && <AuthorsList />}
         {activeTab === MainViewTab.Genres && <GenresList />}
       </Paper>
-    </div>
+    </>
   );
 };
 

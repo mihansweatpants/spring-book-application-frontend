@@ -3,13 +3,13 @@ import React, { FC, useEffect, useState } from 'react';
 import { TablePagination } from '@material-ui/core';
 
 import { BooksApi } from 'api';
-import { BookDtoShort } from 'api/types/books/books';
+import { BookDto } from 'api/types/books/books';
 import { usePagination } from 'utils/usePagination';
 import BooksTable from './BooksTable';
 
 const BooksList: FC = () => {
 
-  const [books, setBooks] = useState<BookDtoShort[]>([]);
+  const [books, setBooks] = useState<BookDto[]>([]);
   const {
     page,
     setPage,

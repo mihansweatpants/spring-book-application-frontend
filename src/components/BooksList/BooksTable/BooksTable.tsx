@@ -1,16 +1,23 @@
 import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Table, TableHead, TableRow, TableBody, TableCell } from '@material-ui/core';
 
-import { BookDtoShort } from 'api/types/books/books';
+import { BookDto } from 'api/types/books/books';
+
+import { useStyles } from './styles';
 
 interface Props {
-  books: BookDtoShort[];
+  books: BookDto[];
 }
 
 const BooksTable: FC<Props> = ({
   books,
 }) => {
+  const styles = useStyles();
+
+  const history = useHistory();
+
   return (
     <Table>
       <TableHead>
@@ -25,7 +32,7 @@ const BooksTable: FC<Props> = ({
       <TableBody>
         {
           books.map(({ id, title, author, genres }) => (
-            <TableRow key={id}>
+            <TableRow hover key={id} onClick={() => history.push(`/books/${id}`)} className={styles.row}>
               <TableCell>{id}</TableCell>
               <TableCell>{title}</TableCell>
               <TableCell>{author.name}</TableCell>

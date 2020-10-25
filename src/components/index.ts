@@ -5,3 +5,5 @@ export { default as MainViewTabs } from './MainViewTabs';
 export { default as MainView } from './MainView';
 export { default as Router } from './Router';
 export { default as NotFound } from './NotFound';
+export { default as BookView } from './BookView';
+export { default as Layout } from './Layout';
