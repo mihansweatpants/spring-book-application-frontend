@@ -6,12 +6,12 @@
 ### Установка зависимостей
 
 ```bash
-yarn
+npx yarn
 ```
 
 ### Запуск дев-сервера с приложением
 
 
 ```bash
-yarn start
+npx yarn start
 ```
