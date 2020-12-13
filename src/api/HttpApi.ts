@@ -1,9 +1,9 @@
-import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import qs from 'query-string';
 import { BasepApiResponse } from 'api/types/base/response';
 
 const API_URL = process.env.REACT_APP_API_URL || '';
-
+const LOGIN_ROUTE = '/login';
 export default abstract class HttpApi {
   protected http: AxiosInstance;
 
@@ -21,23 +21,23 @@ export default abstract class HttpApi {
   }
 
   protected get<T = any>(url: string, config?: AxiosRequestConfig) {
-    return this.response<T>(this.http.get(url, config));
+    return this.response<T>(this.auth(this.http.get(url, config)));
   }
 
   protected post<T = any>(url: string, data?: any, config?: AxiosRequestConfig) {
-    return this.response<T>(this.http.post(url, data, config));
+    return this.response<T>(this.auth(this.http.post(url, data, config)));
   }
 
   protected put<T = any>(url: string, data?: any, config?: AxiosRequestConfig) {
-    return this.response<T>(this.http.put(url, data, config));
+    return this.response<T>(this.auth(this.http.put(url, data, config)));
   }
 
   protected patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig) {
-    return this.response<T>(this.http.patch(url, data, config));
+    return this.response<T>(this.auth(this.http.patch(url, data, config)));
   }
 
   protected delete<T = any>(url: string, config?: AxiosRequestConfig) {
-    return this.response<T>(this.http.delete(url, config));
+    return this.response<T>(this.auth(this.http.delete(url, config)));
   }
 
   protected async getAll<T = any>(url: string, config?: AxiosRequestConfig): Promise<T[]> {
@@ -72,5 +72,20 @@ export default abstract class HttpApi {
     }
 
     return responseData.data;
+  }
+
+  private async auth<T = any>(request: AxiosPromise<T>): Promise<AxiosResponse<T>> {
+    try {
+      return await request;
+    }
+    catch (error) {
+      const { response }: AxiosError = error;
+
+      if (response != null && response.status === 401 && window.location.pathname !== LOGIN_ROUTE) {
+        window.location.href = LOGIN_ROUTE;
+      }
+
+      throw error;
+    }
   }
 }

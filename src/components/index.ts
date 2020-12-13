@@ -8,3 +8,6 @@ export { default as NotFound } from './NotFound';
 export { default as BookView } from './BookView';
 export { default as Layout } from './Layout';
 export { default as CreateBookView } from './CreateBookView';
+export { default as SpinnerView } from './SpinnerView';
+export { default as LoginView } from './LoginView';
+export { default as Header } from './Header';
